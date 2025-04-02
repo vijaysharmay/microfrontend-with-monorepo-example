@@ -18,31 +18,16 @@
     "target": "es2022",
     "customConditions": ["development"],
     "paths": {
-      "hr/Module": ["apps/hr/src/remote-entry.ts"],
-      "hr/Home": ["apps/hr/src/app/pages/home.tsx"],
-      "hr/Reports": ["apps/hr/src/app/pages/reports.tsx"],
-      "hr/Notifications": ["apps/hr/src/app/pages/notifications-center.tsx"],
-      "hr/NewJobRequisition": [
-        "apps/hr/src/app/pages/job-requisition/new-job-requisition.tsx"
-      ],
-      "hr/ViewJobRequisitions": [
-        "apps/hr/src/app/pages/job-requisition/view-job-requisitions.tsx"
-      ],
-      "hr/AnnualReviews": [
-        "apps/hr/src/app/pages/rewards-and-recognition/annual-reviews.tsx"
-      ],
-      "hr/SharePerspectives": [
-        "apps/hr/src/app/pages/rewards-and-recognition/share-perspectives.tsx"
-      ],
-
-      "finance/Module": ["apps/finance/src/remote-entry.ts"],
       "finance/Home": ["apps/finance/src/app/pages/home.tsx"],
-      "finance/Reports": ["apps/finance/src/app/pages/reports.tsx"],
-      "finance/Notifications": [
-        "apps/finance/src/app/pages/notifications-center.tsx"
+      "finance/InventoryManagement": [
+        "apps/finance/src/app/pages/inventory-management.tsx"
       ],
+      "finance/Module": ["apps/finance/src/remote-entry.ts"],
       "finance/NewVendor": [
         "apps/finance/src/app/pages/accounting/new-vendor.tsx"
+      ],
+      "finance/Notifications": [
+        "apps/finance/src/app/pages/notifications-center.tsx"
       ],
       "finance/ReceivablesInvoices": [
         "apps/finance/src/app/pages/accounting/receivables-invoices.tsx"
@@ -50,11 +35,25 @@
       "finance/ReceivablesKPIs": [
         "apps/finance/src/app/pages/accounting/receivables-kpis.tsx"
       ],
+      "finance/Reports": ["apps/finance/src/app/pages/reports.tsx"],
       "finance/ReviewPurchaseOrders": [
         "apps/finance/src/app/pages/accounting/review-purchase-orders.tsx"
       ],
-      "finance/InventoryManagement": [
-        "apps/finance/src/app/pages/inventory-management.tsx"
+      "hr/AnnualReviews": [
+        "apps/hr/src/app/pages/rewards-and-recognition/annual-reviews.tsx"
+      ],
+      "hr/Home": ["apps/hr/src/app/pages/home.tsx"],
+      "hr/Module": ["apps/hr/src/remote-entry.ts"],
+      "hr/NewJobRequisition": [
+        "apps/hr/src/app/pages/job-requisition/new-job-requisition.tsx"
+      ],
+      "hr/Notifications": ["apps/hr/src/app/pages/notifications-center.tsx"],
+      "hr/Reports": ["apps/hr/src/app/pages/reports.tsx"],
+      "hr/SharePerspectives": [
+        "apps/hr/src/app/pages/rewards-and-recognition/share-perspectives.tsx"
+      ],
+      "hr/ViewJobRequisitions": [
+        "apps/hr/src/app/pages/job-requisition/view-job-requisitions.tsx"
       ]
     },
     "baseUrl": "."

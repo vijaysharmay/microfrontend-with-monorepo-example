@@ -1,20 +1,57 @@
 import { composePlugins, withNx, withReact } from '@nx/rspack';
-import { withModuleFederation } from '@nx/module-federation/rspack';
 
-import baseConfig from './module-federation.config';
+// export default composePlugins(
+//   withNx(),
+//   withReact(),
+//   withModuleFederation(config, { dts: false })
+// );
 
-const config = {
-  ...baseConfig,
-};
+import { container } from '@rspack/core';
 
-// Nx plugins for rspack to build config object from Nx options and context.
-/**
- * DTS Plugin is disabled in Nx Workspaces as Nx already provides Typing support Module Federation
- * The DTS Plugin can be enabled by setting dts: true
- * Learn more about the DTS Plugin here: https://module-federation.io/configure/dts.html
- */
-export default composePlugins(
-  withNx(),
-  withReact(),
-  withModuleFederation(config, { dts: false })
-);
+const { ModuleFederationPlugin } = container;
+
+export default composePlugins(withNx(), withReact(), async (config) => {
+  config.resolve ??= {};
+  config.resolve.alias ??= {};
+
+  config.experiments ??= {};
+  config.experiments.outputModule = true; // 🔥 must be set
+
+  config.output ??= {};
+  config.output.module = true; // ✅ ESM output
+  config.output.library = {
+    type: 'module', // ✅ Required for native module federation
+  };
+
+  config.plugins ??= [];
+
+  config.plugins.push(
+    new ModuleFederationPlugin({
+      name: 'hr',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Module': './src/remote-entry.ts',
+        './Home': './src/app/pages/home.tsx',
+        './Reports': './src/app/pages/reports.tsx',
+        './Notifications': './src/app/pages/notifications-center.tsx',
+        './NewJobRequisition':
+          './src/app/pages/job-requisition/new-job-requisition.tsx',
+        './ViewJobRequisitions':
+          './src/app/pages/job-requisition/view-job-requisitions.tsx',
+        './AnnualReviews':
+          './src/app/pages/rewards-and-recognition/annual-reviews.tsx',
+        './SharePerspectives':
+          './src/app/pages/rewards-and-recognition/share-perspectives.tsx',
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: '^18.3.1' },
+        'react-dom': { singleton: true, requiredVersion: '^18.3.1' },
+      },
+      library: {
+        type: 'module',
+      },
+    })
+  );
+
+  return config;
+});
