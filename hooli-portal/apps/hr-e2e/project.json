@@ -1,0 +1,20 @@
+{
+  "name": "hr-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/hr-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["hr"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/hr-e2e"],
+      "options": {
+        "config": "apps/hr-e2e/playwright.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

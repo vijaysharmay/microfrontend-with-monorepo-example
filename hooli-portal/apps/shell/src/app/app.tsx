@@ -1,0 +1,107 @@
+import {
+  Alert20Filled,
+  Box20Filled,
+  ChartPerson20Filled,
+  CollectionsAdd20Filled,
+  Home20Filled,
+  MoneyHand20Filled,
+  PersonMoney20Filled,
+  Reward20Filled,
+} from '@fluentui/react-icons';
+import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
+import * as React from 'react';
+import { Route, Switch } from 'wouter';
+
+const Hr = React.lazy(() => import('hr/Module'));
+const Finance = React.lazy(() => import('finance/Module'));
+
+export function App() {
+  const navItems: SideNavItem[] = [
+    { label: 'Home', icon: <Home20Filled />, href: '/' },
+    {
+      sectionLabel: 'Hooli HR',
+      children: [
+        { label: 'Home', icon: <Home20Filled />, href: '/hr' },
+        {
+          label: 'Reports',
+          icon: <ChartPerson20Filled />,
+          href: '/hr/reports',
+        },
+        {
+          label: 'Notifications',
+          icon: <Alert20Filled />,
+          href: '/hr/notifications',
+        },
+        {
+          categoryLabel: 'Manage Open Positions',
+          icon: <CollectionsAdd20Filled />,
+          children: [
+            { label: 'Create Job Requisition', href: '/hr/requisition/new' },
+            { label: 'View Job Requisitions', href: '/hr/requisition/view' },
+          ],
+        },
+        {
+          categoryLabel: 'Rewards & Recognition',
+          icon: <Reward20Filled />,
+          children: [
+            { label: 'Annual Reviews', href: '/hr/rewards/review' },
+            { label: 'Share Perspectives', href: '/hr/rewards/share' },
+          ],
+        },
+      ],
+    },
+    {
+      sectionLabel: 'Hooli Finance',
+      children: [
+        { label: 'Home', icon: <Home20Filled />, href: '/finance' },
+        {
+          label: 'Reports',
+          icon: <ChartPerson20Filled />,
+          href: '/finance/reports',
+        },
+        {
+          label: 'Notifications',
+          icon: <Alert20Filled />,
+          href: '/finance/notifications',
+        },
+        {
+          categoryLabel: 'Accounts Receivable',
+          icon: <MoneyHand20Filled />,
+          children: [
+            { label: 'KPIs', href: '/finance/receivables/kpis' },
+            { label: 'Invoices', href: '/finance/receivables/invoices' },
+          ],
+        },
+        {
+          categoryLabel: 'Accounts Payable',
+          icon: <PersonMoney20Filled />,
+          children: [
+            {
+              label: 'Review Purchase Orders',
+              href: '/finance/payables/review',
+            },
+            { label: 'Add Vendor', href: '/finance/payables/vendor-new' },
+          ],
+        },
+        {
+          label: 'Inventory Management',
+          icon: <Box20Filled />,
+          href: '/finance/inventory',
+        },
+      ],
+    },
+  ];
+  return (
+    <SideNav heading="Hooli HR" navItems={navItems}>
+      <Switch>
+        <Route path="/">
+          <div>This is the shell home page</div>
+        </Route>
+        <Hr />
+        <Finance />
+      </Switch>
+    </SideNav>
+  );
+}
+
+export default App;
