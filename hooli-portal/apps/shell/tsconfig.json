@@ -9,6 +9,9 @@
       "path": "../hr"
     },
     {
+      "path": "../../libs/uicomponents"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {

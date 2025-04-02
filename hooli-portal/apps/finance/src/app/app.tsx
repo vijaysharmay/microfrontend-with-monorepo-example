@@ -7,6 +7,7 @@ import {
   PersonMoney20Filled,
 } from '@fluentui/react-icons';
 import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
+import { Switch } from 'wouter';
 import Router from './router';
 
 export function App() {
@@ -43,7 +44,9 @@ export function App() {
   ];
   return (
     <SideNav heading="Hooli Finance" navItems={navItems}>
-      <Router attachPrefixFlag={false} />
+      <Switch>
+        <Router attachPrefixFlag={false} />
+      </Switch>
     </SideNav>
   );
 }

@@ -244,8 +244,6 @@ importers:
 
   apps/shell-e2e: {}
 
-  libs/components: {}
-
   libs/uicomponents: {}
 
 packages:

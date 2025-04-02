@@ -1,4 +1,4 @@
-import { Route, Switch } from 'wouter';
+import { Route } from 'wouter';
 import NewVendor from './pages/accounting/new-vendor';
 import ReceivablesInvoices from './pages/accounting/receivables-invoices';
 import ReceivablesKPIs from './pages/accounting/receivables-kpis';
@@ -10,9 +10,13 @@ import Reports from './pages/reports';
 
 export default function Router({ attachPrefixFlag = true }) {
   const prefix = attachPrefixFlag ? 'finance/' : '';
+  console.log('finance', attachPrefixFlag);
   return (
-    <Switch>
-      <Route path={`/${prefix}`} component={Home} />
+    <>
+      <Route
+        path={attachPrefixFlag ? `/${prefix}home` : '/'}
+        component={Home}
+      />
       <Route path={`/${prefix}reports`} component={Reports} />
       <Route path={`/${prefix}notifications`} component={NotificationsCenter} />
       <Route path={`/${prefix}receivables/kpis`} component={ReceivablesKPIs} />
@@ -26,7 +30,6 @@ export default function Router({ attachPrefixFlag = true }) {
       />
       <Route path={`/${prefix}payables/vendor-new`} component={NewVendor} />
       <Route path={`/${prefix}inventory`} component={InventoryManagement} />
-      <Route>404: No such page in Hooli Finance Portal !</Route>
-    </Switch>
+    </>
   );
 }

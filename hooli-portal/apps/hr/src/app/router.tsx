@@ -1,4 +1,4 @@
-import { Route, Switch } from 'wouter';
+import { Route } from 'wouter';
 
 import Home from './pages/home';
 import NewJobRequisition from './pages/job-requisition/new-job-requisition';
@@ -10,9 +10,13 @@ import SharePerspectives from './pages/rewards-and-recognition/share-perspective
 
 export default function Router({ attachPrefixFlag = true }) {
   const prefix = attachPrefixFlag ? 'hr/' : '';
+  console.log('hr', attachPrefixFlag);
   return (
-    <Switch>
-      <Route path={`/${prefix}`} component={Home} />
+    <>
+      <Route
+        path={attachPrefixFlag ? `/${prefix}home` : '/'}
+        component={Home}
+      />
       <Route path={`/${prefix}reports`} component={Reports} />
       <Route path={`/${prefix}notifications`} component={NotificationsCenter} />
       <Route path={`/${prefix}requisition/new`} component={NewJobRequisition} />
@@ -22,7 +26,6 @@ export default function Router({ attachPrefixFlag = true }) {
       />
       <Route path={`/${prefix}rewards/review`} component={AnnualReviews} />
       <Route path={`/${prefix}rewards/share`} component={SharePerspectives} />
-      <Route>404: No such page in Hooli HR Portal !</Route>
-    </Switch>
+    </>
   );
 }

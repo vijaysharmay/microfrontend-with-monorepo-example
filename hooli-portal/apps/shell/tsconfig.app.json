@@ -37,6 +37,9 @@
     },
     {
       "path": "../hr/tsconfig.app.json"
+    },
+    {
+      "path": "../../libs/uicomponents/tsconfig.lib.json"
     }
   ]
 }
