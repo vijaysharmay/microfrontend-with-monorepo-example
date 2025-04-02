@@ -106,14 +106,52 @@ export const remoteRoutes: RemoteRoute[] = [
     section: 'Logistics',
     import: () => import('finance/InventoryManagement'),
   },
+  {
+    path: '/engineering/home',
+    label: 'Home',
+    import: () => import('engineering/Home'),
+  },
+  {
+    path: '/engineering/reports',
+    label: 'Reports',
+    import: () => import('engineering/Reports'),
+  },
+  {
+    path: '/engineering/notifications',
+    label: 'Notifications',
+    import: () => import('engineering/Notifications'),
+  },
 ];
 
 export function AppRoutes() {
   return (
     <Suspense fallback={<div>Loading remote...</div>}>
       {remoteRoutes.map(({ path, import: importFn }) => {
-        const Component = lazy(importFn);
-        return <Route key={path} path={path} component={Component} />;
+        const LazyComponent = lazy(async () => {
+          const mod = await importFn();
+          console.log(`[Remote Load] ${path}`, mod);
+          if (!mod?.default) {
+            throw new Error(`No default export in ${path}`);
+          }
+
+          const name = mod.default?.name || 'anonymous';
+          console.log(`[Remote Component] default export name: ${name}`);
+          return mod;
+        });
+        return (
+          <Route
+            key={path}
+            path={path}
+            component={() => {
+              console.log(`[Wouter Match] Rendering ${path}`);
+              return (
+                <Suspense fallback={<div>Loading remote...</div>}>
+                  <LazyComponent />
+                </Suspense>
+              );
+            }}
+          />
+        );
       })}
     </Suspense>
   );

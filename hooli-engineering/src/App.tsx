@@ -4,6 +4,10 @@ import {
   Home20Filled,
 } from "@fluentui/react-icons";
 import { SideNav, SideNavItem } from "@hooli-portal/uicomponents";
+import { Route, Switch } from "wouter";
+import Home from "./home";
+import Notifications from "./notifications";
+import Reports from "./reports";
 
 export function App() {
   const navItems: SideNavItem[] = [
@@ -13,7 +17,12 @@ export function App() {
   ];
   return (
     <SideNav heading="Hooli Engineering" navItems={navItems}>
-      <div>Hello to Hooli Engineering</div>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/reports" component={Reports} />
+        <Route path="/notifications" component={Notifications} />
+        <Route>404 from engineering</Route>
+      </Switch>
     </SideNav>
   );
 }

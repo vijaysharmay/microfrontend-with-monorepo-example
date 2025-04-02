@@ -87,6 +87,22 @@ export function App() {
         },
       ],
     },
+    {
+      sectionLabel: 'Hooli Engineering',
+      children: [
+        { label: 'Home', icon: <Home20Filled />, href: '/engineering/home' },
+        {
+          label: 'Reports',
+          icon: <ChartPerson20Filled />,
+          href: '/engineering/reports',
+        },
+        {
+          label: 'Notifications',
+          icon: <Alert20Filled />,
+          href: '/engineering/notifications',
+        },
+      ],
+    },
   ];
   return (
     <SideNav heading="Hooli Portal" navItems={navItems}>
@@ -94,7 +110,8 @@ export function App() {
         <Route path="/">
           <div>This is the shell home page</div>
         </Route>
-        <AppRoutes />
+        {AppRoutes()}
+        <Route>404</Route>
       </Switch>
     </SideNav>
   );

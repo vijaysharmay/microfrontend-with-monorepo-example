@@ -4,11 +4,15 @@ import { composePlugins, withNx, withReact } from '@nx/rspack';
 
 import baseConfig from './module-federation.config';
 
-const prodConfig: ModuleFederationConfig = {
+const remoteEngineeringUrl =
+  process.env.ENGINEERING_REMOTE_URL || 'http://localhost:4203';
+
+const config: ModuleFederationConfig = {
   ...baseConfig,
   remotes: [
     ['hr', process.env.HR_REMOTE_URL || 'http://localhost:4201/'],
     ['finance', process.env.FINANCE_REMOTE_URL || 'http://localhost:4202/'],
+    ['engineering', `promise import(${remoteEngineeringUrl}/remoteEntry.js)`],
   ],
 };
 
@@ -21,5 +25,5 @@ const prodConfig: ModuleFederationConfig = {
 export default composePlugins(
   withNx(),
   withReact(),
-  withModuleFederation(prodConfig, { dts: false })
+  withModuleFederation(config, { dts: false })
 );
