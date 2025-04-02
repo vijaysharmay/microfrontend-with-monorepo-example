@@ -1,31 +1,14 @@
-import { composePlugins, withNx, withReact } from '@nx/rspack';
-import { withModuleFederation } from '@nx/module-federation/rspack';
 import { ModuleFederationConfig } from '@nx/module-federation';
+import { withModuleFederation } from '@nx/module-federation/rspack';
+import { composePlugins, withNx, withReact } from '@nx/rspack';
 
 import baseConfig from './module-federation.config';
 
 const prodConfig: ModuleFederationConfig = {
   ...baseConfig,
-  /*
-   * Remote overrides for production.
-   * Each entry is a pair of a unique name and the URL where it is deployed.
-   *
-   * e.g.
-   * remotes: [
-   *   ['app1', 'http://app1.example.com'],
-   *   ['app2', 'http://app2.example.com'],
-   * ]
-   *
-   * You can also use a full path to the remoteEntry.js file if desired.
-   *
-   * remotes: [
-   *   ['app1', 'http://example.com/path/to/app1/remoteEntry.js'],
-   *   ['app2', 'http://example.com/path/to/app2/remoteEntry.js'],
-   * ]
-   */
   remotes: [
-    ['hr', 'http://localhost:4201/'],
-    ['finance', 'http://localhost:4202/'],
+    ['hr', process.env.HR_REMOTE_URL || 'http://localhost:4201/'],
+    ['finance', process.env.FINANCE_REMOTE_URL || 'http://localhost:4202/'],
   ],
 };
 
