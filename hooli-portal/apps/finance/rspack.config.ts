@@ -29,6 +29,7 @@ export default composePlugins(withNx(), withReact(), async (config) => {
     new ModuleFederationPlugin({
       name: 'finance',
       filename: 'remoteEntry.js',
+      library: { type: 'module' },
       exposes: {
         './Module': './src/remote-entry.ts',
         './Home': './src/app/pages/home.tsx',
@@ -45,9 +46,6 @@ export default composePlugins(withNx(), withReact(), async (config) => {
       shared: {
         react: { singleton: true, requiredVersion: '^18.3.1' },
         'react-dom': { singleton: true, requiredVersion: '^18.3.1' },
-      },
-      library: {
-        type: 'module',
       },
     })
   );

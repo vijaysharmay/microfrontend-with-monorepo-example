@@ -29,6 +29,7 @@ export default composePlugins(withNx(), withReact(), async (config) => {
     new ModuleFederationPlugin({
       name: 'hr',
       filename: 'remoteEntry.js',
+      library: { type: 'module' },
       exposes: {
         './Module': './src/remote-entry.ts',
         './Home': './src/app/pages/home.tsx',

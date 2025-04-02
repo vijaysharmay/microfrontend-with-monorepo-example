@@ -1,20 +1,18 @@
-import { ModuleFederationConfig } from '@nx/module-federation';
-import { withModuleFederation } from '@nx/module-federation/rspack';
 import { composePlugins, withNx, withReact } from '@nx/rspack';
 
-import baseConfig from './module-federation.config';
+import { container } from '@rspack/core';
 
-const remoteEngineeringUrl =
-  process.env.ENGINEERING_REMOTE_URL || 'http://localhost:4203';
+// const engineeringRemoteUrl =
 
-const config: ModuleFederationConfig = {
-  ...baseConfig,
-  remotes: [
-    ['hr', process.env.HR_REMOTE_URL || 'http://localhost:4201/'],
-    ['finance', process.env.FINANCE_REMOTE_URL || 'http://localhost:4202/'],
-    ['engineering', `promise import(${remoteEngineeringUrl}/remoteEntry.js)`],
-  ],
-};
+// const hrRemoteUrl = process.env.HR_REMOTE_URL || 'http://localhost:4201';
+// const financeRemoteUrl =
+//   process.env.FINANCE_REMOTE_URL || 'http://localhost:4202';
+
+const engineeringRemoteUrl = 'https://hooli-engineering.vercel.app';
+const hrRemoteUrl = 'https://hooli-hr.vercel.app';
+const financeRemoteUrl = 'https://hooli-finance.vercel.app';
+
+const { ModuleFederationPlugin } = container;
 
 // Nx plugins for rspack to build config object from Nx options and context.
 /**
@@ -22,8 +20,36 @@ const config: ModuleFederationConfig = {
  * The DTS Plugin can be enabled by setting dts: true
  * Learn more about the DTS Plugin here: https://module-federation.io/configure/dts.html
  */
-export default composePlugins(
-  withNx(),
-  withReact(),
-  withModuleFederation(config, { dts: false })
-);
+export default composePlugins(withNx(), withReact(), async (config) => {
+  config.resolve ??= {};
+  config.resolve.alias ??= {};
+
+  config.experiments ??= {};
+  config.experiments.outputModule = true; // ✅ Critical
+
+  config.output ??= {};
+  config.output.module = true; // ✅ ESM build
+  config.output.library = {
+    type: 'module', // ✅ Required for native ESM remote
+  };
+
+  config.plugins ??= [];
+
+  config.plugins.push(
+    new ModuleFederationPlugin({
+      name: 'shell',
+      filename: 'remoteEntry.js',
+      remotes: {
+        hr: `promise import("${hrRemoteUrl}/remoteEntry.js")`,
+        finance: `promise import("${financeRemoteUrl}/remoteEntry.js")`,
+        engineering: `promise import("${engineeringRemoteUrl}/remoteEntry.js")`,
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: false },
+        'react-dom': { singleton: true, requiredVersion: false },
+      },
+    })
+  );
+
+  return config;
+});

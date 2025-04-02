@@ -2,12 +2,15 @@ import { composePlugins, withNx, withReact } from '@nx/rspack';
 
 import { container } from '@rspack/core';
 
-const engineeringRemoteUrl =
-  process.env.ENGINEERING_REMOTE_URL || 'http://localhost:4203';
+// const engineeringRemoteUrl =
 
-const hrRemoteUrl = process.env.HR_REMOTE_URL || 'http://localhost:4201';
-const financeRemoteUrl =
-  process.env.FINANCE_REMOTE_URL || 'http://localhost:4202';
+// const hrRemoteUrl = process.env.HR_REMOTE_URL || 'http://localhost:4201';
+// const financeRemoteUrl =
+//   process.env.FINANCE_REMOTE_URL || 'http://localhost:4202';
+
+const engineeringRemoteUrl = 'https://hooli-engineering.vercel.app';
+const hrRemoteUrl = 'https://hooli-hr.vercel.app';
+const financeRemoteUrl = 'https://hooli-finance.vercel.app';
 
 const { ModuleFederationPlugin } = container;
 
@@ -20,6 +23,15 @@ const { ModuleFederationPlugin } = container;
 export default composePlugins(withNx(), withReact(), async (config) => {
   config.resolve ??= {};
   config.resolve.alias ??= {};
+
+  config.experiments ??= {};
+  config.experiments.outputModule = true; // ✅ Critical
+
+  config.output ??= {};
+  config.output.module = true; // ✅ ESM build
+  config.output.library = {
+    type: 'module', // ✅ Required for native ESM remote
+  };
 
   config.plugins ??= [];
 
