@@ -47,9 +47,6 @@ export default composePlugins(withNx(), withReact(), async (config) => {
         react: { singleton: true, requiredVersion: '^18.3.1' },
         'react-dom': { singleton: true, requiredVersion: '^18.3.1' },
       },
-      library: {
-        type: 'module',
-      },
     })
   );
 
