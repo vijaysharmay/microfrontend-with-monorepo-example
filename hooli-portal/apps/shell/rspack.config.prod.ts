@@ -61,6 +61,7 @@ export default composePlugins(withNx(), withReact(), async (config) => {
         react: { singleton: true, requiredVersion: false },
         'react-dom': { singleton: true, requiredVersion: false },
       },
+      remoteType: 'module',
     })
   );
 
