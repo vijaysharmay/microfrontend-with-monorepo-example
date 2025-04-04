@@ -1,16 +1,17 @@
 import { composePlugins, withNx, withReact } from '@nx/rspack';
 
-import { container } from '@rspack/core';
+import { container, rspack } from '@rspack/core';
 
-// const engineeringRemoteUrl =
+const engineeringRemoteUrl =
+  process.env.ENGINEERING_REMOTE_URL || 'http://localhost:4203';
 
-// const hrRemoteUrl = process.env.HR_REMOTE_URL || 'http://localhost:4201';
-// const financeRemoteUrl =
-//   process.env.FINANCE_REMOTE_URL || 'http://localhost:4202';
+const hrRemoteUrl = process.env.HR_REMOTE_URL || 'http://localhost:4201';
+const financeRemoteUrl =
+  process.env.FINANCE_REMOTE_URL || 'http://localhost:4202';
 
-const engineeringRemoteUrl = 'https://hooli-engineering.vercel.app';
-const hrRemoteUrl = 'https://hooli-hr.vercel.app';
-const financeRemoteUrl = 'https://hooli-finance.vercel.app';
+// const engineeringRemoteUrl = 'https://hooli-engineering.vercel.app';
+// const hrRemoteUrl = 'https://hooli-hr.vercel.app';
+// const financeRemoteUrl = 'https://hooli-finance.vercel.app';
 
 const { ModuleFederationPlugin } = container;
 
@@ -34,6 +35,18 @@ export default composePlugins(withNx(), withReact(), async (config) => {
   };
 
   config.plugins ??= [];
+
+  config.plugins = config.plugins.filter(
+    (plugin) => !(plugin instanceof rspack.HtmlRspackPlugin)
+  );
+
+  config.plugins.push(
+    new rspack.HtmlRspackPlugin({
+      scriptLoading: 'module',
+      template: './src/index.html',
+      filename: 'index.html',
+    })
+  );
 
   config.plugins.push(
     new ModuleFederationPlugin({
