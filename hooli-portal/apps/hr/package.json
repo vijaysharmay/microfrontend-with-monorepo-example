@@ -4,5 +4,6 @@
   "private": true,
   "dependencies": {
     "@hooli-portal/uicomponents": "workspace:*"
-  }
+  },
+  "type": "module"
 }
