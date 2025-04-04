@@ -6,7 +6,7 @@ import { composePlugins, withNx, withReact } from '@nx/rspack';
 //   withModuleFederation(config, { dts: false })
 // );
 
-import { container } from '@rspack/core';
+import { container, rspack } from '@rspack/core';
 
 const { ModuleFederationPlugin } = container;
 
@@ -24,6 +24,18 @@ export default composePlugins(withNx(), withReact(), async (config) => {
   };
 
   config.plugins ??= [];
+
+  config.plugins = config.plugins.filter(
+    (plugin) => !(plugin instanceof rspack.HtmlRspackPlugin)
+  );
+
+  config.plugins.push(
+    new rspack.HtmlRspackPlugin({
+      scriptLoading: 'module',
+      template: './src/index.html',
+      filename: 'index.html',
+    })
+  );
 
   config.plugins.push(
     new ModuleFederationPlugin({
