@@ -46,6 +46,7 @@ export default composePlugins(withNx(), withReact(), async (config) => {
       template: './src/index.html',
       filename: 'index.html',
       chunks: ['main', 'runtime'],
+      remoteType: 'module',
     })
   );
 

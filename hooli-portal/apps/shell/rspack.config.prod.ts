@@ -54,6 +54,7 @@ export default composePlugins(withNx(), withReact(), async (config) => {
       name: 'shell',
       filename: 'remoteEntry.js',
       library: { type: 'module' },
+      remoteType: 'module',
       remotes: {
         hr: `promise import("${hrRemoteUrl}/remoteEntry.js")`,
         finance: `promise import("${financeRemoteUrl}/remoteEntry.js")`,
