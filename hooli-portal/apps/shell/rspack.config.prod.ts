@@ -52,6 +52,7 @@ export default composePlugins(withNx(), withReact(), async (config) => {
     new ModuleFederationPlugin({
       name: 'shell',
       filename: 'remoteEntry.js',
+      library: { type: 'module' },
       remotes: {
         hr: `promise import("${hrRemoteUrl}/remoteEntry.js")`,
         finance: `promise import("${financeRemoteUrl}/remoteEntry.js")`,
