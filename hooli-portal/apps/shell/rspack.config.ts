@@ -45,7 +45,6 @@ export default composePlugins(withNx(), withReact(), async (config) => {
       scriptLoading: 'module',
       template: './src/index.html',
       filename: 'index.html',
-      inject: false,
       chunks: ['main', 'runtime'],
     })
   );
