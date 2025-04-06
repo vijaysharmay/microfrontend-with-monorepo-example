@@ -1,6 +1,6 @@
 import { composePlugins, withNx, withReact } from '@nx/rspack';
 
-import { container, rspack } from '@rspack/core';
+import { container, rspack, RspackOptions } from '@rspack/core';
 
 const engineeringRemoteUrl =
   process.env.ENGINEERING_REMOTE_URL || 'http://localhost:4203';
@@ -21,51 +21,54 @@ const { ModuleFederationPlugin } = container;
  * The DTS Plugin can be enabled by setting dts: true
  * Learn more about the DTS Plugin here: https://module-federation.io/configure/dts.html
  */
-export default composePlugins(withNx(), withReact(), async (config) => {
-  config.resolve ??= {};
-  config.resolve.alias ??= {};
+export default composePlugins(
+  withNx(),
+  withReact(),
+  async (config: RspackOptions) => {
+    config.resolve ??= {};
+    config.resolve.alias ??= {};
 
-  config.experiments ??= {};
-  config.experiments.outputModule = true; // ✅ Critical
+    config.experiments ??= {};
+    config.experiments.outputModule = true; // ✅ Critical
 
-  config.output ??= {};
-  config.output.module = true; // ✅ ESM build
-  config.output.library = {
-    type: 'module', // ✅ Required for native ESM remote
-  };
+    // config.output ??= {};
+    // config.output.module = true; // ✅ ESM build
+    // config.output.library = {
+    //   type: 'module', // ✅ Required for native ESM remote
+    // };
 
-  config.plugins ??= [];
+    config.plugins ??= [];
 
-  config.plugins = config.plugins.filter(
-    (plugin) => !(plugin instanceof rspack.HtmlRspackPlugin)
-  );
+    config.plugins = config.plugins.filter(
+      (plugin) => !(plugin instanceof rspack.HtmlRspackPlugin)
+    );
 
-  config.plugins.push(
-    new rspack.HtmlRspackPlugin({
-      scriptLoading: 'module',
-      template: './src/index.html',
-      filename: 'index.html',
-      chunks: ['main', 'runtime'],
-      remoteType: 'module',
-    })
-  );
+    config.plugins.push(
+      new rspack.HtmlRspackPlugin({
+        scriptLoading: 'module',
+        template: './src/index.html',
+        filename: 'index.html',
+        chunks: ['main', 'runtime'],
+      })
+    );
 
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: 'shell',
-      filename: 'remoteEntry.js',
-      library: { type: 'module' },
-      remotes: {
-        hr: `promise import("${hrRemoteUrl}/remoteEntry.js")`,
-        finance: `promise import("${financeRemoteUrl}/remoteEntry.js")`,
-        engineering: `promise import("${engineeringRemoteUrl}/remoteEntry.js")`,
-      },
-      shared: {
-        react: { singleton: true, requiredVersion: false },
-        'react-dom': { singleton: true, requiredVersion: false },
-      },
-    })
-  );
+    config.plugins.push(
+      new ModuleFederationPlugin({
+        name: 'shell',
+        filename: 'remoteEntry.js',
+        library: { type: 'module' },
+        remotes: {
+          hr: `promise import("${hrRemoteUrl}/remoteEntry.js")`,
+          finance: `promise import("${financeRemoteUrl}/remoteEntry.js")`,
+          engineering: `promise import("${engineeringRemoteUrl}/remoteEntry.js")`,
+        },
+        shared: {
+          react: { singleton: true, requiredVersion: false },
+          'react-dom': { singleton: true, requiredVersion: false },
+        },
+      })
+    );
 
-  return config;
-});
+    return config;
+  }
+);

@@ -28,11 +28,11 @@ export default composePlugins(withNx(), withReact(), async (config) => {
   config.experiments ??= {};
   config.experiments.outputModule = true; // ✅ Critical
 
-  config.output ??= {};
-  config.output.module = true; // ✅ ESM build
-  config.output.library = {
-    type: 'module', // ✅ Required for native ESM remote
-  };
+  // config.output ??= {};
+  // config.output.module = true; // ✅ ESM build
+  // config.output.library = {
+  //   type: 'module', // ✅ Required for native ESM remote
+  // };
 
   config.plugins ??= [];
 
