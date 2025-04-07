@@ -39,7 +39,7 @@ export default defineConfig({
     react(),
     federation({
       name: 'shell',
-      filename: 'remoteEntry.js',
+      filename: 'assets/remoteEntry.js',
       remotes: {
         hr: {
           type: 'module',
