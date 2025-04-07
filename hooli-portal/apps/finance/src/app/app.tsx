@@ -6,7 +6,7 @@ import {
   MoneyHand20Filled,
   PersonMoney20Filled,
 } from '@fluentui/react-icons';
-import { SideNav, SideNavItem } from '@hooli-monorepo/uicomponents';
+import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
 import { Route, Switch } from 'wouter';
 import NewVendor from './pages/accounting/new-vendor';
 import ReceivablesInvoices from './pages/accounting/receivables-invoices';

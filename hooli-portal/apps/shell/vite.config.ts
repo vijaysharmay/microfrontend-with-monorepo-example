@@ -13,7 +13,7 @@ const financeRemoteUrl =
 export default defineConfig({
   resolve: {
     alias: {
-      '@hooli-monorepo/uicomponents': path.resolve(
+      '@hooli-portal/uicomponents': path.resolve(
         __dirname,
         '../../libs/uicomponents/src/index.ts'
       ),

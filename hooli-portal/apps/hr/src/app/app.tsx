@@ -5,7 +5,7 @@ import {
   Home20Filled,
   Reward20Filled,
 } from '@fluentui/react-icons';
-import { SideNav, SideNavItem } from '@hooli-monorepo/uicomponents';
+import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
 import { Route, Switch } from 'wouter';
 import Home from './pages/home';
 import NewJobRequisition from './pages/job-requisition/new-job-requisition';

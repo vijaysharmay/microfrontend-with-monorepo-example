@@ -5,7 +5,7 @@ import NxWelcome from './nx-welcome';
 export function App() {
   return (
     <div>
-      <NxWelcome title="@hooli-monorepo/legal" />
+      <NxWelcome title="@hooli-portal/legal" />
     </div>
   );
 }

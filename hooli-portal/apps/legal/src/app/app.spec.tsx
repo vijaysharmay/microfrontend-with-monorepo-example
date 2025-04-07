@@ -11,7 +11,7 @@ describe('App', () => {
   it('should have a greeting as the title', () => {
     const { getAllByText } = render(<App />);
     expect(
-      getAllByText(new RegExp('Welcome @hooli-monorepo/legal', 'gi')).length > 0
+      getAllByText(new RegExp('Welcome @hooli-portal/legal', 'gi')).length > 0
     ).toBeTruthy();
   });
 });

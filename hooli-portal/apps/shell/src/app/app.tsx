@@ -8,7 +8,7 @@ import {
   PersonMoney20Filled,
   Reward20Filled,
 } from '@fluentui/react-icons';
-import { SideNav, SideNavItem } from '@hooli-monorepo/uicomponents';
+import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
 import { Route, Switch } from 'wouter';
 import { AppRoutes } from './routes';
 

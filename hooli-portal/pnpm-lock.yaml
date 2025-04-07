@@ -174,13 +174,13 @@ importers:
 
   apps/finance:
     dependencies:
-      '@hooli-monorepo/uicomponents':
+      '@hooli-portal/uicomponents':
         specifier: workspace:*
         version: link:../../libs/uicomponents
 
   apps/hr:
     dependencies:
-      '@hooli-monorepo/uicomponents':
+      '@hooli-portal/uicomponents':
         specifier: workspace:*
         version: link:../../libs/uicomponents
 
@@ -188,7 +188,7 @@ importers:
 
   apps/shell:
     dependencies:
-      '@hooli-monorepo/uicomponents':
+      '@hooli-portal/uicomponents':
         specifier: workspace:*
         version: link:../../libs/uicomponents
 
