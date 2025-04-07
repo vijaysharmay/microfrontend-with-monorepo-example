@@ -46,4 +46,4 @@ vitest.config.*.timestamp*
 test-output
 .__mf__temp
 .nx
-.vscode
+.vscode/

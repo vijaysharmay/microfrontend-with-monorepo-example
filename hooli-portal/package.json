@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev:hr": "pnpm --filter hr run build && pnpm --filter hr run preview",
-    "dev:finance": "pnpm --filter finance run build && pnpm --filter finance run preview",
-    "dev:shell": "pnpm --filter shell run build && pnpm --filter shell run preview",
+    "preview:hr": "pnpm --filter hr run build && pnpm --filter hr run preview",
+    "preview:finance": "pnpm --filter finance run build && pnpm --filter finance run preview",
+    "preview:shell": "pnpm --filter shell run build && pnpm --filter shell run preview",
+    "preview:all": "concurrently \"pnpm run preview:hr\" \"pnpm run preview:finance\" \"pnpm run preview:shell\"",
+    "dev:hr": "pnpm --filter hr run dev",
+    "dev:finance": "pnpm --filter finance run dev",
+    "dev:shell": "pnpm --filter shell run dev",
     "dev:all": "concurrently \"pnpm run dev:hr\" \"pnpm run dev:finance\" \"pnpm run dev:shell\""
   },
   "private": true,
