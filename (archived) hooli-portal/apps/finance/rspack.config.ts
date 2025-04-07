@@ -27,11 +27,11 @@ export default composePlugins(
     config.experiments ??= {};
     config.experiments.outputModule = true; // 🔥 must be set
 
-    // config.output ??= {};
-    // config.output.module = true; // ✅ ESM output
-    // config.output.library = {
-    //   type: 'module', // ✅ Required for native module federation
-    // };
+    config.output ??= {};
+    config.output.module = true; // ✅ ESM output
+    config.output.library = {
+      type: 'module', // ✅ Required for native module federation
+    };
 
     config.plugins ??= [];
 
@@ -73,6 +73,8 @@ export default composePlugins(
         chunks: ['main', 'runtime'],
       })
     );
+
+    console.log('config dev', config);
 
     return config;
   }

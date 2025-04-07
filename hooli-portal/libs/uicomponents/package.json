@@ -1,20 +1,17 @@
 {
-  "name": "@hooli-portal/uicomponents",
-  "version": "0.0.5",
+  "name": "@hooli-monorepo/uicomponents",
+  "version": "0.0.1",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
+      "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist",
-    "!**/*.tsbuildinfo"
-  ]
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  }
 }

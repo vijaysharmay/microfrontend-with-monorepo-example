@@ -1,9 +1,13 @@
 {
-  "name": "@hooli-portal/finance",
+  "name": "@hooli-monorepo/finance",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@hooli-portal/uicomponents": "workspace:*"
+    "@hooli-monorepo/uicomponents": "workspace:*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "type": "module"
 }

@@ -19,7 +19,7 @@ export default defineConfig({
     react(),
     federation({
       name: "engineering",
-      filename: "remoteEntry.js",
+      filename: "assets/remoteEntry.js",
       exposes: {
         "./Home": "./src/home.tsx",
         "./Reports": "./src/reports.tsx",

@@ -4,25 +4,22 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/shell-e2e"
-    },
-    {
-      "path": "./apps/shell"
-    },
-    {
-      "path": "./apps/hr-e2e"
-    },
-    {
       "path": "./apps/hr"
     },
-    {
-      "path": "./apps/finance-e2e"
-    },
+
     {
       "path": "./apps/finance"
     },
+
+    {
+      "path": "./apps/legal"
+    },
     {
       "path": "./libs/uicomponents"
+    },
+
+    {
+      "path": "./apps/shell"
     }
   ]
 }

@@ -64,5 +64,6 @@ export default composePlugins(withNx(), withReact(), async (config) => {
     })
   );
 
+  console.log('config production', config);
   return config;
 });

@@ -17,11 +17,11 @@ export default composePlugins(withNx(), withReact(), async (config) => {
   config.experiments ??= {};
   config.experiments.outputModule = true; // 🔥 must be set
 
-  // config.output ??= {};
-  // config.output.module = true; // ✅ ESM output
-  // config.output.library = {
-  //   type: 'module', // ✅ Required for native module federation
-  // };
+  config.output ??= {};
+  config.output.module = true; // ✅ ESM output
+  config.output.library = {
+    type: 'module', // ✅ Required for native module federation
+  };
 
   config.plugins ??= [];
 
@@ -64,5 +64,6 @@ export default composePlugins(withNx(), withReact(), async (config) => {
     })
   );
 
+  console.log('config dev', config);
   return config;
 });

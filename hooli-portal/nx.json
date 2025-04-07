@@ -8,13 +8,11 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.mjs",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/test-setup.[jt]s"
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.mjs"
     ],
     "sharedGlobals": []
   },
@@ -45,12 +43,6 @@
       }
     },
     {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "eslint:lint"
-      }
-    },
-    {
       "plugin": "@nx/vite/plugin",
       "options": {
         "buildTargetName": "build",
@@ -65,56 +57,24 @@
       }
     },
     {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
       "plugin": "@nx/playwright/plugin",
       "options": {
-        "targetName": "playwright:e2e"
+        "targetName": "e2e"
       }
     }
   ],
   "targetDefaults": {
-    "build": {
-      "cache": true,
+    "test": {
       "dependsOn": ["^build"]
     },
-    "@nx/eslint:lint": {
-      "cache": true,
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.mjs"
-      ]
-    },
-    "e2e": {
-      "cache": true,
-      "inputs": ["default", "^production"]
-    },
-    "@nx/jest:jest": {
-      "cache": true,
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    },
-    "test": {
-      "dependsOn": ["^build", "^build", "^build"]
-    },
-    "@nx/rspack:rspack": {
-      "inputs": [
-        "production",
-        "^production",
-        {
-          "env": "NX_MF_DEV_REMOTES"
-        }
-      ],
-      "dependsOn": ["^build"],
-      "cache": true
+    "e2e-ci--**/*": {
+      "dependsOn": ["^build"]
     }
   },
   "generators": {
@@ -123,7 +83,7 @@
         "babel": true,
         "style": "css",
         "linter": "eslint",
-        "bundler": "rspack"
+        "bundler": "vite"
       },
       "component": {
         "style": "css"
@@ -133,11 +93,6 @@
         "linter": "eslint",
         "unitTestRunner": "vitest"
       }
-    }
-  },
-  "release": {
-    "version": {
-      "preVersionCommand": "pnpm dlx nx run-many -t build"
     }
   }
 }

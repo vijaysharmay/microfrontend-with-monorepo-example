@@ -1,89 +1,40 @@
 {
-  "name": "@hooli-portal/shell",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/shell/src",
-  "projectType": "application",
-  "tags": [],
+  "name": "shell",
   "targets": {
     "build": {
-      "executor": "@nx/rspack:rspack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@nx/vite:build",
       "options": {
-        "outputPath": "apps/shell/dist",
-        "index": "apps/shell/src/index.html",
-        "baseHref": "/",
-        "main": "apps/shell/src/main.ts",
-        "tsConfig": "apps/shell/tsconfig.app.json",
-        "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets"],
-        "rspackConfig": "apps/shell/rspack.config.ts",
-        "styles": ["apps/shell/src/styles.css"],
-        "scripts": [],
-        "configurations": {
-          "development": {
-            "mode": "development"
-          },
-          "production": {
-            "mode": "production",
-            "optimization": true,
-            "sourceMap": false,
-            "outputHashing": "all",
-            "namedChunks": false,
-            "extractLicenses": true,
-            "vendorChunk": false
-          }
-        },
-        "target": "web"
-      },
-      "configurations": {
-        "production": {
-          "rspackConfig": "apps/shell/rspack.config.prod.ts"
-        }
-      },
-      "dependsOn": ["^build", "typecheck"]
+        "outputPath": "dist/apps/shell"
+      }
     },
     "serve": {
-      "executor": "@nx/rspack:module-federation-dev-server",
-      "defaultConfiguration": "development",
+      "executor": "@nx/vite:dev-server",
       "options": {
-        "buildTarget": "@hooli-portal/shell:build",
-        "hmr": true,
+        "buildTarget": "shell:build",
         "port": 4200
       },
       "configurations": {
         "development": {
-          "buildTarget": "@hooli-portal/shell:build:development"
-        },
-        "production": {
-          "buildTarget": "@hooli-portal/shell:build:production",
-          "hmr": false
-        }
-      },
-      "dependsOn": ["typecheck"]
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "serve-static": {
-      "executor": "@nx/rspack:module-federation-static-server",
-      "defaultConfiguration": "production",
-      "options": {
-        "serveTarget": "@hooli-portal/shell:serve"
-      },
-      "configurations": {
-        "development": {
-          "serveTarget": "@hooli-portal/shell:serve:development"
-        },
-        "production": {
-          "serveTarget": "@hooli-portal/shell:serve:production"
+          "devRemotes": ["hr", "finance"]
         }
       }
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{projectRoot}/test-output/jest/coverage"],
+    "preview": {
+      "executor": "nx:run-commands",
       "options": {
-        "jestConfig": "apps/shell/jest.config.ts"
+        "command": "vite preview --port=4200 --strictPort --base=/"
+      },
+      "dependsOn": ["build"]
+    },
+    "dev:all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": true,
+        "commands": [
+          "nx preview hr --port=4201",
+          "nx preview finance --port=4202",
+          "nx preview shell --port=4200"
+        ]
       }
     }
   }

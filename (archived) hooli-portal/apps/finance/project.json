@@ -1,0 +1,92 @@
+{
+  "name": "finance",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/finance/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rspack:rspack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "apps/finance/dist",
+        "index": "apps/finance/src/index.html",
+        "baseHref": "/",
+        "main": "apps/finance/src/main.ts",
+        "tsConfig": "apps/finance/tsconfig.app.json",
+        "assets": ["apps/finance/src/favicon.ico", "apps/finance/src/assets"],
+        "rspackConfig": "apps/finance/rspack.config.ts",
+        "styles": ["apps/finance/src/styles.css"],
+        "scripts": [],
+        "configurations": {
+          "development": {
+            "mode": "development",
+            "outputModule": true
+          },
+          "production": {
+            "mode": "production",
+            "optimization": true,
+            "sourceMap": false,
+            "outputHashing": "all",
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "outputModule": true
+          }
+        },
+        "target": "web"
+      },
+      "configurations": {
+        "production": {
+          "rspackConfig": "apps/finance/rspack.config.prod.ts"
+        }
+      },
+      "dependsOn": ["^build", "typecheck"]
+    },
+    "serve": {
+      "executor": "@nx/rspack:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "finance:build",
+        "hmr": true,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "finance:build:development"
+        },
+        "production": {
+          "buildTarget": "finance:build:production",
+          "hmr": false
+        }
+      },
+      "dependsOn": ["typecheck"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "executor": "@nx/rspack:module-federation-static-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "serveTarget": "finance:serve"
+      },
+      "configurations": {
+        "development": {
+          "serveTarget": "finance:serve:development"
+        },
+        "production": {
+          "serveTarget": "finance:serve:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{projectRoot}/test-output/jest/coverage"],
+      "options": {
+        "jestConfig": "apps/finance/jest.config.ts"
+      }
+    }
+  }
+}

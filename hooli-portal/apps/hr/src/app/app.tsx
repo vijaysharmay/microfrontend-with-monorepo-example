@@ -5,9 +5,15 @@ import {
   Home20Filled,
   Reward20Filled,
 } from '@fluentui/react-icons';
-import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
-import { Switch } from 'wouter';
-import Router from './router';
+import { SideNav, SideNavItem } from '@hooli-monorepo/uicomponents';
+import { Route, Switch } from 'wouter';
+import Home from './pages/home';
+import NewJobRequisition from './pages/job-requisition/new-job-requisition';
+import ViewJobRequisitions from './pages/job-requisition/view-job-requisitions';
+import NotificationsCenter from './pages/notifications-center';
+import Reports from './pages/reports';
+import AnnualReviews from './pages/rewards-and-recognition/annual-reviews';
+import SharePerspectives from './pages/rewards-and-recognition/share-perspectives';
 
 export function App() {
   const navItems: SideNavItem[] = [
@@ -39,7 +45,13 @@ export function App() {
   return (
     <SideNav heading="Hooli HR" navItems={navItems}>
       <Switch>
-        <Router attachPrefixFlag={false} />
+        <Route path={'/'} component={Home} />
+        <Route path={`/reports`} component={Reports} />
+        <Route path={`/notifications`} component={NotificationsCenter} />
+        <Route path={`/requisition/new`} component={NewJobRequisition} />
+        <Route path={`/requisition/view`} component={ViewJobRequisitions} />
+        <Route path={`/rewards/review`} component={AnnualReviews} />
+        <Route path={`/rewards/share`} component={SharePerspectives} />
       </Switch>
     </SideNav>
   );

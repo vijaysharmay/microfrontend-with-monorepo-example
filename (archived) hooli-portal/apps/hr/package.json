@@ -1,0 +1,9 @@
+{
+  "name": "@hooli-portal/hr",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@hooli-portal/uicomponents": "workspace:*"
+  },
+  "type": "module"
+}

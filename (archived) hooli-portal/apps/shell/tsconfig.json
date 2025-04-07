@@ -1,0 +1,22 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "../finance"
+    },
+    {
+      "path": "../hr"
+    },
+    {
+      "path": "../../libs/uicomponents"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "extends": "../../tsconfig.base.json"
+}
