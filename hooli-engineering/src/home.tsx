@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Hooli Engineering Home</div>;
+  return <div>This is the home page for the Hooli Engineering Division</div>;
 }

@@ -1,3 +1,3 @@
 export default function ReceivablesInvoices() {
-  return <div>ReceivablesInvoices</div>;
+  return <div>Generate Receivables Invoice</div>;
 }

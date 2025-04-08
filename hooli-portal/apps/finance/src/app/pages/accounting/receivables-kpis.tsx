@@ -1,3 +1,3 @@
 export default function ReceivablesKPIs() {
-  return <div>ReceivablesKPIs</div>;
+  return <div>Create a Receivables KPI For Tracking</div>;
 }

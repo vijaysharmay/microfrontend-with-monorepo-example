@@ -11,6 +11,7 @@ import {
 import { SideNav, SideNavItem } from '@hooli-portal/uicomponents';
 import { Route, Switch } from 'wouter';
 import { AppRoutes } from './routes';
+import ShellHome from './shell-home';
 
 export function App() {
   const navItems: SideNavItem[] = [
@@ -107,9 +108,7 @@ export function App() {
   return (
     <SideNav heading="Hooli Portal" navItems={navItems}>
       <Switch>
-        <Route path="/">
-          <div>This is the shell home page</div>
-        </Route>
+        <Route path="/" component={ShellHome} />
         {AppRoutes()}
         <Route>404</Route>
       </Switch>

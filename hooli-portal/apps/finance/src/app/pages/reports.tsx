@@ -1,3 +1,3 @@
 export default function Reports() {
-  return <div>Reports</div>;
+  return <div>Here are some of the reports for Hooli Finance</div>;
 }

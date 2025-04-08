@@ -1,3 +1,3 @@
 export default function AnnualReviews() {
-  return <div>AnnualReviews</div>;
+  return <div>This is the Annual Reviews Home Page</div>;
 }

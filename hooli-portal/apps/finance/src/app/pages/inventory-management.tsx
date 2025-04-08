@@ -1,3 +1,3 @@
 export default function InventoryManagement() {
-  return <div>InventoryManagement</div>;
+  return <div>Inventory Management</div>;
 }

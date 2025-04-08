@@ -1,3 +1,7 @@
 export default function NewJobRequisition() {
-  return <div>NewJobRequisition</div>;
+  return (
+    <div>
+      Please create a new job opening for any division under Hooli Corporation
+    </div>
+  );
 }

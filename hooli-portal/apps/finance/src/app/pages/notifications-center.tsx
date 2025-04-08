@@ -1,3 +1,3 @@
 export default function NotificationsCenter() {
-  return <div>NotificationsCenter</div>;
+  return <div>This is the notification centre for Hooli Finance</div>;
 }

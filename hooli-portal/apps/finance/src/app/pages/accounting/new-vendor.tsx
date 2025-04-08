@@ -1,3 +1,3 @@
 export default function NewVendor() {
-  return <div>NewVendor</div>;
+  return <div>Create a New Vendor Entry</div>;
 }

@@ -1,3 +1,3 @@
 export default function ReviewPurchaseOrders() {
-  return <div>ReviewPurchaseOrders</div>;
+  return <div>Review Purchase Orders</div>;
 }

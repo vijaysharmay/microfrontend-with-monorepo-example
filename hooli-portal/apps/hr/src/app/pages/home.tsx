@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Hooli HR Home</div>;
+  return <div>Welcome to the home page of Hooli HR</div>;
 }

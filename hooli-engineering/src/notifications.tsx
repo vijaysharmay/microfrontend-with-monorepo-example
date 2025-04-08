@@ -1,3 +1,3 @@
 export default function Notifications() {
-  return <div>Notifications</div>;
+  return <div>This is the notification centre for Hooli Engineering</div>;
 }
